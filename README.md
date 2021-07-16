@@ -1,2 +1,5 @@
 # project_2
-analyzing precipitation in the US 
+
+University of Irvine Project 2
+
+Analyzing precipitation in the United States and correlations with weather patterns.
