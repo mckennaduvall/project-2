@@ -32,7 +32,7 @@ var myMap = L.map("map", {
     }
   }
 
-var link = "/static/data/US_States.json"
+var link = "../data/US_States.json"
 
   d3.json(link).then(function(data) {
     // Creating a geoJSON layer with the retrieved data
