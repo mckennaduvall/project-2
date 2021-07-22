@@ -14,7 +14,7 @@
   h2{
     font-size: 22px;
     font-weight: bold;
-    text-align:left;
+    
   }
   
   h3{
@@ -63,8 +63,16 @@
   }
 
 h1.specialHeader{
-  margin-left:295px;
+  /* margin-left:295px; */
+  position:relative; bottom:500px;
+  position: relative; left:295px;
 }
+
+label {
+  margin-left:295px;
+  position:relative; bottom:500px;
+}
+
   
   
 
