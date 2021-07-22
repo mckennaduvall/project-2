@@ -1,0 +1,74 @@
+
+
+  
+  h1, h2, h3{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(41, 44, 44);
+  }
+  
+  h1{
+    font-size: 24px;
+    font-weight: bold;
+    text-align:left;
+  }
+  
+  h2{
+    font-size: 22px;
+    font-weight: bold;
+    text-align:left;
+  }
+  
+  h3{
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  p{
+    color: rgb(0, 0, 0);
+    text-align:left;
+  }
+  
+  .navbar{
+      position: absolute;
+      right: 30px;
+  }
+  
+  .navbar a{
+    background-color:rgba(255, 255, 255, 0);
+  }
+  
+  body {
+    width: 100%;
+    min-height:100%;
+    background-color: white;
+  }
+  
+  
+  .homebtn{
+    background-color: white;
+    z-index:2;
+  }
+  
+  .homebtn a{
+    width: 135px;
+    background: rgb(41, 44, 44);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    display: block;
+    padding: 14px;
+    margin: 0px 0px 0px 40px;
+  }
+  
+  
+
+  
+
+  
+
+
+
+
