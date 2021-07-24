@@ -63,18 +63,9 @@
   }
 
 h1.specialHeader{
-  /* margin-left:295px; */
   position:relative; bottom:500px;
   position: relative; right:445px;
   text-align: center;
-}
-
-label {
-  position:relative; bottom:500px;
-  position: relative; right:508px;
-  width: 100%;
-  text-align: center;
-
 }
 
 .livemap {
@@ -86,7 +77,12 @@ label {
   margin-right:auto;
 }
 
-
+.boxbox {
+  position:relative; bottom:500px;
+  position: relative; right:508px;
+  width: 100%;
+  text-align: center;
+}
 
   
   
