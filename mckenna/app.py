@@ -19,44 +19,38 @@ Base = automap_base()
 def hello():
 	return "OUR DATABASE"
 
+
+
 @app.route('/getdata')
 def getdatafrompg():
 	engine = create_engine('postgresql://postgres:postgres@localhost/project_2')
 
 	Base.prepare(engine, reflect=True)
 
-	drought = Base.classes.drought_severity
+	Drought = Base.classes.drought_severity
 
 	session = Session(engine)
 
-	result = session.query(drought)
+	result = session.query(Drought).all()
 
-	data = []
 
 	data_dict = {}
 
 	for row in result:
 
-		counter = 1
+		if row.state not in data_dict:
 
-		if row.state[i] = [row.state[i + 1]]:
+			data_dict[row.state] = {"date": [], "dsci": []}
 
-			
+		data_dict[row.state]["date"].append(row.date)
 
+		data_dict[row.state]["dsci"].append(row.dsci)
+		
 
+	json = jsonify(data_dict)
 
+	print(data_dict)
 
-
-		data.append(row.state)
-
-
-		data_dict[row.date] = row.dsci
-
-		res = {idx: {key : data_dict[key]} for idx, key in zip(data, data_dict)}
-
-
-
-	json = jsonify(data)
 
 	return json 
 
