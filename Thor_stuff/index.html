@@ -48,18 +48,20 @@
         <br>
         <h1>DashBoard</h1>
         <hr>
-        <img src="" alt="dashboard item" width="710">
+        <img src="" alt="dashboard item" width="300">
         <p>text</p>
-        <p>text2</p>
+        <p>the Live Weather Map is updated every 5 minutes and shows the current rainfall for the United States.</p>
+        <p>the Animate button will animate the past 2 hours of rainfall</p>
         <hr>
       </div>
       <div class="col col-12 col-md-4 divbdy">
         <br>
         <h2>charts</h2>
+        <h3>jump to the relitive page by clicking on any of the below images!</h3>
         <hr>
-            <a href="/Thor_stuff/static/HTML/page1.html"><img src="" alt="page1"width="380" style="padding-bottom: 10px;"></a>
-            <a href="/Thor_stuff/static/HTML/page2.html"><img src="" alt="page2"width="380" style="padding-bottom: 10px;"></a>
-            <a href="/Thor_stuff/static/HTML/page3.html"><img src="" alt="page3"width="380" style="padding-bottom: 10px;"></a>
+            <a href="/Thor_stuff/static/HTML/page1.html"><img src="/Thor_stuff/static/img/ab8aa7caf0eb3356135e9eb1b897b3c1.gif" alt="page1"width="280" style="padding-bottom: 10px;"></a>
+            <a href="/Thor_stuff/static/HTML/page2.html"><img src="/Thor_stuff/static/img/ab8aa7caf0eb3356135e9eb1b897b3c1.gif" alt="page2"width="280" style="padding-bottom: 10px;"></a>
+            <a href="/Thor_stuff/static/HTML/page3.html"><img src="/Thor_stuff/static/img/ab8aa7caf0eb3356135e9eb1b897b3c1.gif" alt="page3"width="280" style="padding-bottom: 10px;"></a>
         </div>
       </div>
     </div>
@@ -177,10 +179,10 @@
 <body onload="loadMap()">
 
   <h1 class="specialHeader">Live Weather Map</h1>
-  <div id="map" style="left:295px; height:500px; width:730px;"></div>
+  <div id="map" class="livemap"></div>
 
-  <div style="float:left;">
-  <label style="font-size:16pt"><input type="checkbox" id="animateWeatherCheckBox" onclick="refreshWeatherLayer();" style="width:25px; left:295px; height:25px;">Animate</label>
+  <div>
+  <label class="boxbox" style="font-size:16pt;"><input type="checkbox" id="animateWeatherCheckBox" onclick="refreshWeatherLayer();" style="width:25px; height:25px;">Animate</label>
 </div>   
 </body>
 </html>
