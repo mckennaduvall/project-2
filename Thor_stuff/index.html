@@ -48,18 +48,20 @@
         <br>
         <h1>DashBoard</h1>
         <hr>
-        <img src="" alt="dashboard item" width="710">
+        <img src="" alt="dashboard item" width="300">
         <p>text</p>
-        <p>text2</p>
+        <p>the Live Weather Map is updated every 5 minutes and shows the current rainfall for the United States.</p>
+        <p>the Animate button will animate the past 2 hours of rainfall</p>
         <hr>
       </div>
       <div class="col col-12 col-md-4 divbdy">
         <br>
         <h2>charts</h2>
+        <h3>jump to the relitive page by clicking on any of the below images!</h3>
         <hr>
-            <a href="/Thor_stuff/static/HTML/page1.html"><img src="" alt="page1"width="380" style="padding-bottom: 10px;"></a>
-            <a href="/Thor_stuff/static/HTML/page2.html"><img src="" alt="page2"width="380" style="padding-bottom: 10px;"></a>
-            <a href="/Thor_stuff/static/HTML/page3.html"><img src="" alt="page3"width="380" style="padding-bottom: 10px;"></a>
+            <a href="/Thor_stuff/static/HTML/page1.html"><img src="/Thor_stuff/static/img/ab8aa7caf0eb3356135e9eb1b897b3c1.gif" alt="page1"width="280" style="padding-bottom: 10px;"></a>
+            <a href="/Thor_stuff/static/HTML/page2.html"><img src="/Thor_stuff/static/img/ab8aa7caf0eb3356135e9eb1b897b3c1.gif" alt="page2"width="280" style="padding-bottom: 10px;"></a>
+            <a href="/Thor_stuff/static/HTML/page3.html"><img src="/Thor_stuff/static/img/ab8aa7caf0eb3356135e9eb1b897b3c1.gif" alt="page3"width="280" style="padding-bottom: 10px;"></a>
         </div>
       </div>
     </div>
@@ -80,19 +82,16 @@
       center: {lat: 39.7, lng: -96.2}, zoom: 4
     });
     refreshWeatherLayer();
-   
-    //weather layer refreshes at the next 5 minute mark
+    
     var now = new Date().getTime();
     var msSinceLastFive = now % (5*60*1000);
     var msUntilNextFive = (5*60*1000) - msSinceLastFive;
     setTimeout(function(){
       refreshWeatherLayer();
-      //refresh again in 5 minutes
       setInterval(refreshWeatherLayer, 5*60*1000);
     }, msUntilNextFive + 10*100);
   }
   
-  //probably a smarter way to format dates
   function getDateString(date){     
 
     var year = date.getUTCFullYear();
@@ -108,7 +107,7 @@
     if(hour < 10){
       hour = "0" + hour;
     }
-    //the weather api only gives us weather at 5 minutes marks, round down
+
     var minute = date.getUTCMinutes();
     minute = minute - (minute%5);
     if(minute < 10){
@@ -132,7 +131,6 @@
       clearInterval(animationIntervalFunctionId);        
     }
     
-    //remove previous overlays
     map.overlayMapTypes.clear();
             
     if(animate){       
@@ -174,99 +172,17 @@
     }
     map.overlayMapTypes.getAt(currentAnimationFrame).setOpacity(1);
   }
-  
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNW1HX6j0vwdPXzvAndU_9-ZwqsqPSAYc"></script>
 </head>
 <body onload="loadMap()">
 
-<h1 class="specialHeader">Live Weather Map</h1>
-<div id="map" style="left:295px; height:500px; width:730px;"></div>
-      
-<div style="float:left;"><script>
-  var map;
+  <h1 class="specialHeader">Live Weather Map</h1>
+  <div id="map" class="livemap"></div>
 
-  var currentAnimationFrame = 0;
-  var animationFrames = 0;
-  var animationIntervalFunctionId;
-
-  function loadMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 39.7, lng: -96.2}, zoom: 4
-    });
-    refreshWeatherLayer();
-    
-    //weather layer refreshes at the next 5 minute mark
-    var now = new Date().getTime();
-    var msSinceLastFive = now % (5*60*1000);
-    var msUntilNextFive = (5*60*1000) - msSinceLastFive;
-    setTimeout(function(){
-      refreshWeatherLayer();
-      //refresh again in 5 minutes
-      setInterval(refreshWeatherLayer, 5*60*1000);
-    }, msUntilNextFive + 10*100);
-  }
-  
-  //probably a smarter way to format dates
-  function getDateString(date){     
-
-    var year = date.getUTCFullYear();
-    var month = date.getUTCMonth()+1;
-    if(month < 10){
-      month = "0" + month;
-    }
-    var day = date.getUTCDate();
-    if(day < 10){
-      day = "0" + day;
-    }
-    var hour = date.getUTCHours();
-    if(hour < 10){
-      hour = "0" + hour;
-    }
-    //the weather api only gives us weather at 5 minutes marks, round down
-    var minute = date.getUTCMinutes();
-    minute = minute - (minute%5);
-    if(minute < 10){
-      minute = "0" + minute;
-    }
-       
-    return year.toString()+month.toString()+day.toString()+hour.toString()+minute.toString();   
-  }
-   
-  function addWeatherFrame(index, frameWeatherDate, frameOpacity){
-               
-    var frame = new google.maps.ImageMapType({
-      getTileUrl: function(coord, zoom) {
-        return "http://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/ridge::USCOMP-N0Q-" + frameWeatherDate + "/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
-      },
-      tileSize: new google.maps.Size(256, 256),
-      opacity:frameOpacity,
-      isPng: true
-    });
-    map.overlayMapTypes.setAt(index, frame);        
-  }
-   
-  function incrementAnimationFrame(){
-    map.overlayMapTypes.getAt(currentAnimationFrame).setOpacity(0);
-    currentAnimationFrame++;
-    if(currentAnimationFrame >= animationFrames){
-      currentAnimationFrame = 0;
-    }
-    map.overlayMapTypes.getAt(currentAnimationFrame).setOpacity(1);
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNW1HX6j0vwdPXzvAndU_9-ZwqsqPSAYc"></script>
-</head>
-<body onload="loadMap()">
-
-<div id="map" style="width:100%; height:500px;"></div>
-      
-<div style="float:left;">
-  <label style="font-size:16pt"><input type="checkbox" id="animateWeatherCheckBox" onclick="refreshWeatherLayer(); setAnimateHelpTextVisibility();" style="width:25px; height:25px;">Animate</label>
-</div>
-   
+  <div>
+  <label class="boxbox" style="font-size:16pt;"><input type="checkbox" id="animateWeatherCheckBox" onclick="refreshWeatherLayer();" style="width:25px; height:25px;">Animate</label>
+</div>   
 </body>
-</div>
-</body>
-
 </html>
