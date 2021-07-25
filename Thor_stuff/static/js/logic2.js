@@ -37,6 +37,8 @@ d3.json(url).then(function(data) {
     new_date = parseTime(entries.date)
 
     console.log(new_date)
+
+    
   });
 
 /*     for (i in data.state) {
