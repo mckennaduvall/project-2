@@ -41,8 +41,8 @@ def getdatafrompg():
 		if row.state not in data_dict:
 
 			data_dict[row.state] = {"date": [], "dsci": []}
-
-		data_dict[row.state]["date"].append(row.date)
+			
+		data_dict[row.state]["date"].append(str(row.date)[:4]+"-"+str(row.date)[4:6]+"-"+str(row.date)[6:])
 
 		data_dict[row.state]["dsci"].append(row.dsci)
 		
