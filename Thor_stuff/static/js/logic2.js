@@ -23,41 +23,61 @@ var svg = d3
 
 // Fetch the JSON data and console log it
 // d3.json is exactly like requests.get
-d3.json(url).then(function(data) {
-    console.log(data);
+d3.json(url).then(function(droughtData) {
+    console.log(droughtData);
 
-    let parseTime = d3.timeParse("%Y%m%d");
+    //console.log(droughtData.Alabama.date)
+    //console.log(droughtData.Alabama.dsci)
 
-    const keys = Object.keys(data)
-    console.log(keys)
+    // let parseTime = d3.timeParse("%Y%m%d");
 
-    const entries = Object.entries(data)
-    console.log(entries)
+    // const keys = Object.keys(data)
+    // console.log(keys)
 
-    new_date = parseTime(entries.date)
+    // const entries = Object.entries(data)
 
-    console.log(new_date)
+    // for (i in keys) {
+    //   states = entries[i]
+    //   console.log(states)
+    // }
 
-    
-  });
+function init () {
 
-/*     for (i in data.state) {
-
-      var dateRecorded = data.state["date"];
-
-      console.log(dateRecorded) */
-    
-
-/* 
-    for (var i = 0; i < data.state.length; i++)
-    {
-      var state = data.state[i];
-      var dateRecorded = state.date;
-      var dsci = state.dsci;
-      console.log(dateRecorded)
-      console.log(dsci)
-    } */
+  data = {
+    x: droughtData['Alabama'].date,
+    y: droughtData['Alabama'].dsci,
+  type: 'line'
+ };
+all_data = [data]
+  console.log(data)
+  Plotly.newPlot("myChart", all_data);
+}
 
 
+// Call updatePlotly() when a change takes place to the DOM
+d3.selectAll("#selDataset").on("change", updatePlotly);
+
+// This function is called when a dropdown menu item is selected
+function updatePlotly() {
+  // Use D3 to select the dropdown menu
+  var dropdownMenu = d3.select("#selDataset");
+  // Assign the value of the dropdown menu option to a variable
+  var dataset = dropdownMenu.property("value");
+
+  // Initialize x and y arrays
+  var x = [];
+  var y = [];
+
+  
+    x = droughtData[dataset].date;
+    y = droughtData[dataset].dsci ;
 
 
+  // Note the extra brackets around 'x' and 'y'
+  Plotly.restyle("myChart", "x", [x]);
+  Plotly.restyle("myChart", "y", [y]);
+}
+
+init();
+
+});
