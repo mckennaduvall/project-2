@@ -109,11 +109,11 @@ d3.json(linkState).then(function(dataState) {
     }
   }).addTo(myMap);
 
-  var legend = L.control({position: 'bottomright'});
+  var legend = L.control({position: 'topright'});
     legend.onAdd = function () {
 
     var div = L.DomUtil.create('div', 'info legend');
-    labels = ['<strong>Drought Severity</strong>'],
+    labels = [`<strong>Drought Severity ${data["California"].date[data["California"].date.length - 1]}</strong>`],
     categories = ["Little to no Drought anywhere","Abnormal Dryness","Moderate Drought","Severe Drought","Extreme Drought"];
 
     for (var i = 0; i < categories.length; i++) {
