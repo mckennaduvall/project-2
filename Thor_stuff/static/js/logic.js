@@ -29,9 +29,10 @@ function getColor(category) {
     }
 }
 
-var linkDrought = "../data/dm_export_20150101_20210721.json"
-d3.json(linkDrought).then(function(droughtData) {
-function chooseColor(dsci) {
+var linkServer = "http://127.0.0.1:5000/getdata"
+d3.json(linkServer).then(function(data){
+  //Function to choose state color using dsci value
+  function chooseColor(dsci) {
   if (dsci <= 500 && dsci > 400) {
     return "red"
   }
@@ -49,16 +50,16 @@ function chooseColor(dsci) {
   }
 }
 
+//Function to grab data for specified state
 function getData(name) {
   var latest = 0
   var dsci = 0
-  for (var i=0; i < droughtData.length; i++){
-    droughtData[i].DSCI = +droughtData[i].DSCI
-    droughtData[i].MapDate = +droughtData[i].MapDate
-    if (name == droughtData[i].Name) {
-      if (droughtData[i].MapDate > latest) {
-        latest = droughtData[i].MapDate
-        dsci = droughtData[i].DSCI
+  if (data.hasOwnProperty(name)) {
+    for (var i=0; i < data[name].date.length; i++){
+      var dateFix = parseInt(data[name].date[i].replace("-",""))
+      if ( dateFix > latest){
+        latest = dateFix
+        dsci = data[name].dsci[i]
       }
     }
   }
@@ -66,7 +67,6 @@ function getData(name) {
 }
 
 var linkState = "../data/US_States.json"
-
 d3.json(linkState).then(function(dataState) {
   // Creating a geoJSON layer with the retrieved data
   L.geoJson(dataState, {
@@ -124,77 +124,6 @@ d3.json(linkState).then(function(dataState) {
     return div;
     };
     legend.addTo(myMap);
-
-  // var linkDroughtCounty = "../data/dm_export_20200721_20210721County.json"
-  // d3.json(linkDroughtCounty).then(function(droughtCounty){
-  //   var linkCounty = "../data/US_Counties.json"
-  //   d3.json(linkCounty).then(function(dataCounty) {
-
-  //     function getCounty(name) {
-  //       var latest = 0
-  //       var dsci = 0
-  //       var nameFix = name.split(" ", 1)
-  //       for (var i=0; i < droughtCounty.length; i++){
-  //         droughtCounty[i].DSCI = +droughtCounty[i].DSCI
-  //         droughtCounty[i].MapDate = +droughtCounty[i].MapDate
-  //         var countyFix = droughtCounty[i].County.split(" ", 1)
-
-  //         if (nameFix[0] == countyFix[0]) {
-  //           if (droughtCounty[i].MapDate > latest) {
-  //             latest = droughtCounty[i].MapDate
-  //             dsci = droughtCounty[i].DSCI
-  //           }
-  //         }
-  //       }
-  //       return(dsci)
-  //     }
-  //     var geoCounties = L.geoJson(dataCounty, {
-
-  //       style: function(feature) {
-  //         return {
-  //           color: "white",
-            
-  //           fillColor: chooseColor(getCounty(feature.properties.NAME)),
-  //           fillOpacity: 0.5,
-  //           weight: 1.5
-  //         };
-  //       },
-        
-  //       onEachFeature: function(feature, layer) {
-          
-  //         layer.on({
-            
-  //           mouseover: function(event) {
-  //             layer = event.target;
-  //             layer.setStyle({
-  //               fillOpacity: 0.9
-  //             });
-  //           },
-            
-  //           mouseout: function(event) {
-  //             layer = event.target;
-  //             layer.setStyle({
-  //               fillOpacity: 0.5
-  //             });
-  //           },
-            
-  //           click: function(event) {
-  //             myMap.fitBounds(event.target.getBounds());
-  //           }
-  //         });
-          
-  //         layer.bindPopup("<h1>" + feature.properties.NAME + "</h1> <hr> <h2>" + feature.properties.borough + "</h2>");
-  //       }
-  //     });
-
-      
-  //     var overlayMaps = {
-  //       States: geoState,
-  //       Counties: geoCounties
-  //     }
-  //     L.control.layers(overlayMaps).addTo(myMap);
-  //   });
-  // })
 });
 });
 
