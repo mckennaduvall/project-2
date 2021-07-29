@@ -109,7 +109,7 @@ d3.json(linkState).then(function(dataState) {
     }
   }).addTo(myMap);
 
-  var legend = L.control({position: 'topright'});
+  var legend = L.control({position: 'topleft'});
     legend.onAdd = function () {
 
     var div = L.DomUtil.create('div', 'info legend');
