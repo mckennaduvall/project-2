@@ -1,7 +1,7 @@
 DROP TABLE drought_severity;
 
 CREATE TABLE drought_severity (
-	index INT PRIMARY KEY,start
+	index INT PRIMARY KEY,
 	state VARCHAR(30),
 	date INT,
 	DSCI INT
